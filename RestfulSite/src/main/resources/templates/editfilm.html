@@ -23,8 +23,8 @@
                 contentType: "json",
                 success: function (data) {
                     if ("error_code" in data) {
-                        console.log(data)
-                        $("form[name=myform]").trigger("reset")
+                        alert("Параметр IMDB указан неверно!")
+                        $("form[name=editForm]").trigger("reset")
                         return
                     }
                     window.location.href = "/films"
