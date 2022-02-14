@@ -12,11 +12,11 @@ import java.util.Optional;
 
 @Repository
 public class FilmDaoImpl implements FilmDAO{
-    private static final String req = "SELECT * FROM films";
-    private static final String newFilmReq = "INSERT INTO films(name, description, imdb) VALUES(:name, :description, :imdb)";
-    private static final String delFilmReq = "DELETE FROM films WHERE id=:id";
-    private static final String updateFilmReq = "UPDATE films SET name=:name, description=:description, imdb=:imdb WHERE id=:id";
-    private static final String selectFilm = "SELECT * FROM films WHERE id=:id";
+    private static final String REQ = "SELECT * FROM films";
+    private static final String NEW_FILM_REQ = "INSERT INTO films(name, description, imdb) VALUES(:name, :description, :imdb)";
+    private static final String DEL_FILM_REQ = "DELETE FROM films WHERE id=:id";
+    private static final String UPDATE_FILM_REQ = "UPDATE films SET name=:name, description=:description, imdb=:imdb WHERE id=:id";
+    private static final String SELECT_FILM = "SELECT * FROM films WHERE id=:id";
 
     private final FilmMapper filmMapper;
     private final NamedParameterJdbcTemplate jdbcTemplate;
@@ -32,7 +32,7 @@ public class FilmDaoImpl implements FilmDAO{
         MapSqlParameterSource params = new MapSqlParameterSource();
         try {
             return Optional.of(
-                    jdbcTemplate.query(req, params, filmMapper)
+                    jdbcTemplate.query(REQ, params, filmMapper)
             );
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
@@ -45,14 +45,14 @@ public class FilmDaoImpl implements FilmDAO{
         params.addValue("name", film.getName());
         params.addValue("description", film.getDescription());
         params.addValue("imdb", film.getIMDB());
-        jdbcTemplate.update(newFilmReq, params);
+        jdbcTemplate.update(NEW_FILM_REQ, params);
     }
 
     @Override
     public void deleteFilm(int id) {
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("id", id);
-        jdbcTemplate.update(delFilmReq, params);
+        jdbcTemplate.update(DEL_FILM_REQ, params);
     }
     @Override
     public void editFilm(Film film) {
@@ -61,7 +61,7 @@ public class FilmDaoImpl implements FilmDAO{
         params.addValue("description", film.getDescription());
         params.addValue("imdb", film.getIMDB());
         params.addValue("id", film.getId());
-        jdbcTemplate.update(updateFilmReq, params);
+        jdbcTemplate.update(UPDATE_FILM_REQ, params);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class FilmDaoImpl implements FilmDAO{
         params.addValue("id", id);
         try {
             return Optional.ofNullable(
-                    jdbcTemplate.queryForObject(selectFilm, params, filmMapper)
+                    jdbcTemplate.queryForObject(SELECT_FILM, params, filmMapper)
             );
         } catch (EmptyResultDataAccessException e) {
             return Optional.empty();
