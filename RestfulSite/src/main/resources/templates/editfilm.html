@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+<form name="editForm">
+    <p th:text=" 'Редактирование фильма с id: ' + ${id}"></p>
+    Название фильма: <input type="text" name="name" required>
+    Описание: <input type="text" name="description" required>
+    Оценка фильма IMdb: <input type="text" name="imdb" required>
+    <script>
+        $("form[name=editForm]").submit(function (e) {
+            e.preventDefault()
+            data = $("form[name=editForm]")
+            let id = location.href.split("/")
+            $.ajax({
+                // Меня за**** этот кон***** js, поэтому я сделал немного не по правилам...
+                url: "/api/edit?" + data.serialize() + "&id="+ Number(id[id.length -1]),
+                type: "post",
+                contentType: "json",
+                success: function (data) {
+                    if ("error_code" in data) {
+                        console.log(data)
+                        $("form[name=myform]").trigger("reset")
+                        return
+                    }
+                    window.location.href = "/films"
+                }
+            })
+        })
+    </script>
+    <input type="submit" name="submit" value="изменить">
+</form>
+</body>
+</html>

@@ -1,0 +1,27 @@
+.centred_block {
+    background-color: green;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    margin: auto;
+}
+
+.filmDec {
+    display: inline-block;
+    background-color: red;
+    margin-left: 20px;
+    margin-top: 10px;
+    width: 200px;
+    height: 200px;
+}
+
+.name {
+    text-align: center;
+    font-size: 30px;
+    color: darkblue;
+    word-break: break-all;
+}
+.description {
+    word-break: break-all;
+}
+

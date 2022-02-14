@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/css/films.css">
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/films.js"></script>
+</head>
+<body>
+<div class="centred_block">
+    <th:block th:each="film : ${films}">
+        <span class="filmDec">
+            <p class="name" th:utext="${film.name}"></p>
+            <p class="description" th:utext="'Описание: ' + ${film.description}"></p>
+            <p class="imdb" th:utext="'Оценка IMDB: ' + ${film.IMDB}"></p>
+            <button class="edit" th:value="${film.id}">Редактировать</button>
+            <button class="delbutton" th:value="${film.id}">Удалить фильм</button>
+        </span>
+    </th:block>
+    <span class="addnew">
+        <button>
+            <p>Добавить новый фильм</p>
+        </button>
+    </span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+</body>
+</html>

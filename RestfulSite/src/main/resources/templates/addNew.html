@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <form name="myform">
+        Название фильма: <input type="text" name="name" required>
+        Описание: <input type="text" name="description" required>
+        Оценка фильма IMdb: <input type="text" name="imdb" required>
+        <script>
+            $("form[name=myform]").submit(function (e) {
+                e.preventDefault()
+                data = $("form[name=myform]")
+                $.ajax({
+                    // Меня за**** этот кон***** js, поэтому я сделал немного не по правилам...
+                    url: "/api/addNewFilm?" + data.serialize(),
+                    type: "post",
+                    contentType: "json",
+                    success: function (data) {
+                        if ("error_code" in data) {
+                            alert("Параметр IMDB должен быть числом!")
+                            $("form[name=myform]").trigger("reset")
+                            return
+                        }
+                        window.location.href = "/films"
+                    }
+                })
+            })
+        </script>
+        <input type="submit" name="submit" value="Добавить">
+    </form>
+</div>
+</body>
+</html>

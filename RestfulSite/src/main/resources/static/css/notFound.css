@@ -1,0 +1,15 @@
+.centerBlock {
+    background-color: green;
+    position: absolute;
+    height: 400px;
+    width: 400px;
+    top: 50%;
+    margin: auto;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+p {
+    text-align: center;
+    text-decoration-color: red;
+}
